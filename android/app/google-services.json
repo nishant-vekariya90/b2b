@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "752567435569",
+    "project_id": "webplat-b2b",
+    "storage_bucket": "webplat-b2b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752567435569:android:4154cbe29c9b8ee7abb010",
+        "android_client_info": {
+          "package_name": "com.b2b"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUdwRP3fIQvN1O70YFKcVvjYHp1JxBNWE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

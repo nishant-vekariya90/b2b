@@ -1,0 +1,54 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--android13-->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <!--android13-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-feature android:name="android.hardware.camera" android:required="true"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <queries>
+        <package android:name="com.google.android.apps.nbu.paisa.user" />
+        <package android:name="net.one97.paytm" />
+        <package android:name="com.phonepe.app" />
+        <package android:name="in.org.npci.upiapp" />
+        <package android:name="in.amazon.mShop.android.shopping" />
+        <package android:name="com.whatsapp" />
+    </queries>
+
+    <application android:icon="@mipmap/ic_launcher" tools:node="merge" android:label="B2B" android:theme="@style/LaunchTheme" android:allowBackup="true" android:usesCleartextTraffic="true" tools:replace="android:label, android:theme, android:allowBackup, android:usesCleartextTraffic" android:requestLegacyExternalStorage="true" android:enableOnBackInvokedCallback="true">
+        <activity android:name=".MainActivity" android:exported="true" android:launchMode="singleTask" android:theme="@style/LaunchTheme" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize" android:showWhenLocked="true" android:turnScreenOn="true">
+            <meta-data android:name="io.flutter.embedding.android.NormalTheme" android:resource="@style/NormalTheme" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <meta-data android:name="flutterEmbedding" android:value="2" />
+        <provider android:name="androidx.core.content.FileProvider" android:authorities="${applicationId}.fileProvider" android:exported="false" android:grantUriPermissions="true" tools:replace="android:authorities">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/filepaths" tools:replace="android:resource" />
+        </provider>
+        <!-- Android Notification Channel -->
+        <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="high_importance_channel" />
+        <!--Only add it if you need Auto OTP reading feature is enabled-->
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+        <!-- Paysprint AEPS-->
+        <activity android:name="com.paysprint.onboardinglib.activities.HostActivity" android:theme="@style/LaunchTheme" />
+        <!-- Fingpay MATM -->
+        <service android:name="com.anfu.pos.library.bluetooth4.BluetoothLeService" android:enabled="true" />
+    </application>
+</manifest>
