@@ -28,28 +28,28 @@ jobs:
           channel: 'stable'
           architecture: x64
       
-      # Find the flutter_html_to_pdf package path
+      # Find flutter_html_to_pdf package path
       - name: Find flutter_html_to_pdf package path
         id: find-package-path
         run: echo "$(find . -type d -name 'flutter_html_to_pdf')"
-        shell: /bin/bash -e
+        shell: /bin/zsh -e
 
-      # Update the Kotlin Gradle plugin version
+      # Update Kotlin Gradle plugin version
       - name: Update Kotlin Gradle plugin version
         run: |
           path="${{ steps.find-package-path.outputs.path }}"
-          if [ -z "$path" ]; then
+          if [[ -z "$path" ]]; then
             echo "flutter_html_to_pdf package path not found"
             exit 1
           else
             cd $path
             sed -i '' 's/org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.50/org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31/' build.gradle
           fi
-        shell: /bin/bash -e
+        shell: /bin/zsh -e
         
       # Proceed with the rest of the build process
       - run: flutter build apk --release --split-per-abi
-        shell: /bin/bash -e
+        shell: /bin/zsh -e
         
       - run: |
           flutter build ios --no-codesign
@@ -59,7 +59,7 @@ jobs:
           ln -s ../Runner.app
           cd ..
           zip -r app.ipa Payload
-        shell: /bin/bash -e
+        shell: /bin/zsh -e
 
       - name: Push to Releases
         uses: ncipollo/release-action@v1
