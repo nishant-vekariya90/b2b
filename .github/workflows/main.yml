@@ -27,14 +27,20 @@ jobs:
           architecture: x64
 
       # Update the Kotlin Gradle plugin version
+      # - name: Update Kotlin Gradle plugin version
+      #   run: |
+      #     # Navigate to the build.gradle file for the :flutter_html_to_pdf project
+      #     cd flutter_html_to_pdf
+      #     # Use sed command to update the Kotlin Gradle plugin version
+      #     sed -i '' 's/org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.50/org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31/' build.gradle
+      - name: Find flutter_html_to_pdf package path
+        id: find-package-path
+        run: echo $(find . -type d -name "flutter_html_to_pdf")
+      # Use the output from the find command
       - name: Update Kotlin Gradle plugin version
         run: |
-          # Navigate to the build.gradle file for :flutter_html_to_pdf project
-          # Adjust the path based on the actual location of the build.gradle file
-          cd path/to/flutter_html_to_pdf
-          # Use sed command to update the Kotlin Gradle plugin version
+          cd ${{ steps.find-package-path.outputs.path }}
           sed -i '' 's/org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.50/org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31/' build.gradle
-      
       # Proceed with the rest of the build process
       - run: flutter build apk --release --split-per-abi
       - run: |
