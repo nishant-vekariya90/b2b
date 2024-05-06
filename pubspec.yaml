@@ -20,7 +20,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   device_info_plus: ^9.1.2
   dotted_border: ^2.1.0
-  easy_stepper: ^0.8.3
+  easy_stepper: ^0.8.4
   expandable_text: ^2.3.0
   external_app_launcher: ^4.0.0
   file_picker: ^8.0.3
@@ -81,7 +81,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.2
 
 flutter_assets:
   assets_path: assets/
