@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:marquee/marquee.dart';
 import 'package:sizer/sizer.dart';
+
 import '../../controller/auth_controller.dart';
 import '../../controller/distributor/distributor_dashboard_controller.dart';
 import '../../controller/report_controller.dart';
@@ -243,27 +244,30 @@ class _DistributorDashBoardScreenState extends State<DistributorDashBoardScreen>
                                               ),
                                             ),
                                             InkWell(
-                                              onTap: (){
+                                              onTap: () {
                                                 Get.toNamed(Routes.NOTIFICATION_REPORT_SCREEN);
                                               },
                                               child: Padding(
                                                 padding: const EdgeInsets.symmetric(horizontal: 6.0),
                                                 child: Stack(
                                                   children: [
-                                                    Icon( Icons.notifications_rounded,color: ColorsForApp.primaryColorBlue,size: 3.7.h,),
+                                                    Icon(
+                                                      Icons.notifications_rounded,
+                                                      color: ColorsForApp.primaryColorBlue,
+                                                      size: 3.7.h,
+                                                    ),
                                                     Positioned(
                                                       left: 0.5.w,
                                                       child: Visibility(
                                                         visible: reportController.notificationUnReadCount.value > 0,
                                                         child: Container(
-                                                            decoration: BoxDecoration(
-                                                                borderRadius: BorderRadius.circular(100),
-                                                                color: ColorsForApp.primaryColorBlue,
-                                                                shape: BoxShape.rectangle
-                                                            ),
+                                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(100), color: ColorsForApp.primaryColorBlue, shape: BoxShape.rectangle),
                                                             child: Padding(
                                                               padding: const EdgeInsets.all(2),
-                                                              child: Text(reportController.notificationUnReadCount.value.toString(),style: TextHelper.size10.copyWith(color: ColorsForApp.whiteColor,fontFamily: mediumGoogleSansFont),),
+                                                              child: Text(
+                                                                reportController.notificationUnReadCount.value.toString(),
+                                                                style: TextHelper.size10.copyWith(color: ColorsForApp.whiteColor, fontFamily: mediumGoogleSansFont),
+                                                              ),
                                                             )),
                                                       ),
                                                     ),

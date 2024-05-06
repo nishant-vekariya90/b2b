@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:simple_month_year_picker/simple_month_year_picker.dart';
 import 'package:sizer/sizer.dart';
+
 import '../../../../../utils/app_colors.dart';
 import '../../../../../utils/text_styles.dart';
 import '../../../../../widgets/button.dart';
@@ -17,12 +18,10 @@ class CommissionReportScreen extends StatefulWidget {
   const CommissionReportScreen({super.key});
 
   @override
-  State<CommissionReportScreen> createState() =>
-      _CommissionReportScreenState();
+  State<CommissionReportScreen> createState() => _CommissionReportScreenState();
 }
 
-class _CommissionReportScreenState
-    extends State<CommissionReportScreen> {
+class _CommissionReportScreenState extends State<CommissionReportScreen> {
   ReportController reportController = Get.find();
   ScrollController scrollController = ScrollController();
   TextEditingController dateMonthTxtController = TextEditingController();
@@ -39,13 +38,9 @@ class _CommissionReportScreenState
     reportController.selectedMonth.value = DateTime.now().month.toString();
     reportController.selectedYear.value = DateTime.now().year.toString();
     reportController.selectedMonthName.value = DateFormat('MMM').format(DateTime.now());
-    await reportController.getUnsettledCommissionReportApi(
-        pageNumber: reportController.currentPage.value);
+    await reportController.getUnsettledCommissionReportApi(pageNumber: reportController.currentPage.value);
     scrollController.addListener(() async {
-      if (scrollController.position.maxScrollExtent ==
-              scrollController.position.pixels &&
-          reportController.currentPage.value <
-              reportController.totalPages.value) {
+      if (scrollController.position.maxScrollExtent == scrollController.position.pixels && reportController.currentPage.value < reportController.totalPages.value) {
         reportController.currentPage.value++;
         await reportController.getUnsettledCommissionReportApi(
           pageNumber: reportController.currentPage.value,
@@ -83,16 +78,14 @@ class _CommissionReportScreenState
             Expanded(
               child: Text(
                 'Month & Year',
-                style: TextHelper.size15.copyWith(
-                  fontFamily: mediumGoogleSansFont
-                ),
+                style: TextHelper.size15.copyWith(fontFamily: mediumGoogleSansFont),
               ),
             ),
             InkWell(
               onTap: () async {
-                await selectMonthAndYear(context).then((value) => (){
-                  Get.back();
-                });
+                await selectMonthAndYear(context).then((value) => () {
+                      Get.back();
+                    });
               },
               child: Container(
                 height: 5.h,
@@ -129,134 +122,132 @@ class _CommissionReportScreenState
           ],
         ),
       ),
-      mainBody:Column(
-          children: [
-            height(2.h),
-            Visibility(
-              visible: GetStorage().read(loginTypeKey) != "Retailer" ? true : false,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 3.w),
-                child: Obx(()=>
-                   Row(
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () async {
-                            reportController.selectedCommissionIndex.value = 0;
-                            reportController.currentPage.value = 1;
-                            showProgressIndicator();
-                            await reportController.getUnsettledCommissionReportApi(
-                              pageNumber: reportController.currentPage.value,
-                              isLoaderShow: false,
-                            );
-                            dismissProgressIndicator();
-                          },
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Container(
-                              height: 5.h,
-                              constraints: BoxConstraints(minWidth: 30.w),
-                              padding: const EdgeInsets.symmetric(horizontal: 15),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: const Alignment(-0.0, -0.7),
-                                  end: const Alignment(0, 1),
-                                  colors: reportController.selectedCommissionIndex.value == 0
-                                      ? [
-                                    ColorsForApp.whiteColor,
-                                    ColorsForApp.selectedTabBackgroundColor,
-                                  ]
-                                      : [
-                                    ColorsForApp.whiteColor,
-                                    ColorsForApp.whiteColor,
-                                  ],
-                                ),
-                                color: reportController.selectedCommissionIndex.value == 0 ? ColorsForApp.selectedTabBgColor : ColorsForApp.whiteColor,
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: reportController.selectedCommissionIndex.value == 0 ? ColorsForApp.primaryColor : ColorsForApp.accentColor,
-                                    width: 2,
-                                  ),
-                                ),
+      mainBody: Column(children: [
+        height(2.h),
+        Visibility(
+          visible: GetStorage().read(loginTypeKey) != "Retailer" ? true : false,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 3.w),
+            child: Obx(
+              () => Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () async {
+                        reportController.selectedCommissionIndex.value = 0;
+                        reportController.currentPage.value = 1;
+                        showProgressIndicator();
+                        await reportController.getUnsettledCommissionReportApi(
+                          pageNumber: reportController.currentPage.value,
+                          isLoaderShow: false,
+                        );
+                        dismissProgressIndicator();
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          height: 5.h,
+                          constraints: BoxConstraints(minWidth: 30.w),
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: const Alignment(-0.0, -0.7),
+                              end: const Alignment(0, 1),
+                              colors: reportController.selectedCommissionIndex.value == 0
+                                  ? [
+                                      ColorsForApp.whiteColor,
+                                      ColorsForApp.selectedTabBackgroundColor,
+                                    ]
+                                  : [
+                                      ColorsForApp.whiteColor,
+                                      ColorsForApp.whiteColor,
+                                    ],
+                            ),
+                            color: reportController.selectedCommissionIndex.value == 0 ? ColorsForApp.selectedTabBgColor : ColorsForApp.whiteColor,
+                            border: Border(
+                              bottom: BorderSide(
+                                color: reportController.selectedCommissionIndex.value == 0 ? ColorsForApp.primaryColor : ColorsForApp.accentColor,
+                                width: 2,
                               ),
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Unsettlement Commission Report',
-                                style: TextHelper.size13.copyWith(
-                                  color: reportController.selectedCommissionIndex.value == 0 ? ColorsForApp.primaryColor : ColorsForApp.blackColor,
-                                  fontFamily: reportController.selectedCommissionIndex.value == 0 ? mediumGoogleSansFont : regularGoogleSansFont,
-                                ),
-                              ),
+                            ),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Unsettlement Commission Report',
+                            style: TextHelper.size13.copyWith(
+                              color: reportController.selectedCommissionIndex.value == 0 ? ColorsForApp.primaryColor : ColorsForApp.blackColor,
+                              fontFamily: reportController.selectedCommissionIndex.value == 0 ? mediumGoogleSansFont : regularGoogleSansFont,
                             ),
                           ),
                         ),
                       ),
-                      width(10),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () async {
-                            reportController.selectedCommissionIndex.value = 1;
-                            reportController.currentPage.value = 1;
-                            showProgressIndicator();
-                            await reportController.getSettledCommissionReportApi(
-                              pageNumber: reportController.currentPage.value,
-                              isLoaderShow: false,
-                            );
-                            dismissProgressIndicator();
-                          },
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Container(
-                              height: 5.h,
-                              constraints: BoxConstraints(minWidth: 30.w),
-                              padding: const EdgeInsets.symmetric(horizontal: 15),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: const Alignment(-0.0, -0.7),
-                                  end: const Alignment(0, 1),
-                                  colors: reportController.selectedCommissionIndex.value == 1
-                                      ? [
-                                    ColorsForApp.whiteColor,
-                                    ColorsForApp.selectedTabBackgroundColor,
-                                  ]
-                                      : [
-                                    ColorsForApp.whiteColor,
-                                    ColorsForApp.whiteColor,
-                                  ],
-                                ),
-                                color: reportController.selectedCommissionIndex.value == 1 ? ColorsForApp.selectedTabBgColor : ColorsForApp.whiteColor,
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: reportController.selectedCommissionIndex.value == 1 ? ColorsForApp.primaryColor : ColorsForApp.accentColor,
-                                    width: 2,
-                                  ),
-                                ),
-                              ),
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Settlement Commission Report',
-                                style: TextHelper.size13.copyWith(
-                                    color: reportController.selectedCommissionIndex.value == 1 ? ColorsForApp.primaryColor : ColorsForApp.blackColor,
-                                    fontFamily: reportController.selectedCommissionIndex.value == 1 ? mediumGoogleSansFont : regularGoogleSansFont),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                  width(10),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () async {
+                        reportController.selectedCommissionIndex.value = 1;
+                        reportController.currentPage.value = 1;
+                        showProgressIndicator();
+                        await reportController.getSettledCommissionReportApi(
+                          pageNumber: reportController.currentPage.value,
+                          isLoaderShow: false,
+                        );
+                        dismissProgressIndicator();
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          height: 5.h,
+                          constraints: BoxConstraints(minWidth: 30.w),
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: const Alignment(-0.0, -0.7),
+                              end: const Alignment(0, 1),
+                              colors: reportController.selectedCommissionIndex.value == 1
+                                  ? [
+                                      ColorsForApp.whiteColor,
+                                      ColorsForApp.selectedTabBackgroundColor,
+                                    ]
+                                  : [
+                                      ColorsForApp.whiteColor,
+                                      ColorsForApp.whiteColor,
+                                    ],
+                            ),
+                            color: reportController.selectedCommissionIndex.value == 1 ? ColorsForApp.selectedTabBgColor : ColorsForApp.whiteColor,
+                            border: Border(
+                              bottom: BorderSide(
+                                color: reportController.selectedCommissionIndex.value == 1 ? ColorsForApp.primaryColor : ColorsForApp.accentColor,
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Settlement Commission Report',
+                            style: TextHelper.size13.copyWith(
+                                color: reportController.selectedCommissionIndex.value == 1 ? ColorsForApp.primaryColor : ColorsForApp.blackColor,
+                                fontFamily: reportController.selectedCommissionIndex.value == 1 ? mediumGoogleSansFont : regularGoogleSansFont),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            height(1.h),
-            Obx(
-                  () => Expanded(
-                child: (reportController.unSettledReportDataList.isEmpty && reportController.selectedCommissionIndex.value == 0) ||
-                    (reportController.settledReportDataList.isEmpty && reportController.selectedCommissionIndex.value == 1)
-                    ? notFoundText(text: 'No report found')
-                    : Padding(
-                                        padding: const EdgeInsets.only(left: 8.0, right: 8),
-                                        child: Material(
+          ),
+        ),
+        height(1.h),
+        Obx(
+          () => Expanded(
+            child: (reportController.unSettledReportDataList.isEmpty && reportController.selectedCommissionIndex.value == 0) || (reportController.settledReportDataList.isEmpty && reportController.selectedCommissionIndex.value == 1)
+                ? notFoundText(text: 'No report found')
+                : Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8),
+                    child: Material(
                       color: Colors.white,
                       elevation: 3,
                       shape: const RoundedRectangleBorder(
@@ -267,18 +258,9 @@ class _CommissionReportScreenState
                         controller: scrollController,
                         physics: const BouncingScrollPhysics(),
                         padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-                        itemCount:  reportController.selectedCommissionIndex.value == 0 ? reportController.unSettledReportDataList.length : reportController.settledReportDataList.length,
+                        itemCount: reportController.selectedCommissionIndex.value == 0 ? reportController.unSettledReportDataList.length : reportController.settledReportDataList.length,
                         itemBuilder: (context, index) {
-                          if (index ==
-                              (reportController.selectedCommissionIndex
-                                  .value ==
-                                  0
-                                  ? reportController
-                                  .unSettledReportDataList.length
-                                  : reportController
-                                  .settledReportDataList.length) -
-                                  1 &&
-                              reportController.hasNext.value) {
+                          if (index == (reportController.selectedCommissionIndex.value == 0 ? reportController.unSettledReportDataList.length : reportController.settledReportDataList.length) - 1 && reportController.hasNext.value) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
                               child: Center(
@@ -289,163 +271,100 @@ class _CommissionReportScreenState
                             );
                           } else {
                             if (reportController.selectedCommissionIndex.value == 0) {
-                              commSettledUnsettledData = reportController
-                                  .unSettledReportDataList[index];
+                              commSettledUnsettledData = reportController.unSettledReportDataList[index];
                             } else {
-                              commSettledUnsettledData =
-                              reportController.settledReportDataList[index];
+                              commSettledUnsettledData = reportController.settledReportDataList[index];
                             }
 
                             return GestureDetector(
                               onTap: () {
-                                Get.toNamed(
-                                    Routes.COMMISSION_DETAILS_REPORT_SCREEN);
+                                Get.toNamed(Routes.COMMISSION_DETAILS_REPORT_SCREEN);
                               },
                               child: Obx(
-                                    () => customCard(
+                                () => customCard(
                                   child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 4.w, vertical: 1.h),
+                                      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
                                       child: Column(
                                         children: [
                                           height(1.h),
                                           Row(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
                                               // Closing Balance
                                               Expanded(
                                                 child: customKeyValueText(
                                                   key: 'Txn Amount :',
-                                                  value: commSettledUnsettledData
-                                                      .amount !=
-                                                      null
-                                                      ? '₹ ${commSettledUnsettledData.amount!.toStringAsFixed(2)}'
-                                                      : '-',
+                                                  value: commSettledUnsettledData.amount != null ? '₹ ${commSettledUnsettledData.amount!.toStringAsFixed(2)}' : '-',
                                                 ),
                                               ),
-                                              reportController
-                                                  .selectedCommissionIndex
-                                                  .value ==
-                                                  1
+                                              reportController.selectedCommissionIndex.value == 1
                                                   ? Container(
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                    BorderRadius.circular(
-                                                        8),
-                                                    border: Border.all(
-                                                        color: commSettledUnsettledData
-                                                            .status ==
-                                                            0
-                                                            ? ColorsForApp
-                                                            .chilliRedColor
-                                                            : commSettledUnsettledData
-                                                            .status ==
-                                                            1
-                                                            ? ColorsForApp
-                                                            .successColor
-                                                            : ColorsForApp
-                                                            .orangeColor,
-                                                        width: 0.2)),
-                                                child: Padding(
-                                                  padding:
-                                                  const EdgeInsets
-                                                      .all(8),
-                                                  child: Text(
-                                                    reportController
-                                                        .settlementCommissionStatus(
-                                                        commSettledUnsettledData
-                                                            .status!),
-                                                    style: TextHelper
-                                                        .size13
-                                                        .copyWith(
-                                                      color: commSettledUnsettledData
-                                                          .status ==
-                                                          0
-                                                          ? ColorsForApp
-                                                          .chilliRedColor
-                                                          : commSettledUnsettledData
-                                                          .status ==
-                                                          1
-                                                          ? ColorsForApp
-                                                          .successColor
-                                                          : ColorsForApp
-                                                          .orangeColor,
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
+                                                      decoration: BoxDecoration(
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          border: Border.all(
+                                                              color: commSettledUnsettledData.status == 0
+                                                                  ? ColorsForApp.chilliRedColor
+                                                                  : commSettledUnsettledData.status == 1
+                                                                      ? ColorsForApp.successColor
+                                                                      : ColorsForApp.orangeColor,
+                                                              width: 0.2)),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.all(8),
+                                                        child: Text(
+                                                          reportController.settlementCommissionStatus(commSettledUnsettledData.status!),
+                                                          style: TextHelper.size13.copyWith(
+                                                            color: commSettledUnsettledData.status == 0
+                                                                ? ColorsForApp.chilliRedColor
+                                                                : commSettledUnsettledData.status == 1
+                                                                    ? ColorsForApp.successColor
+                                                                    : ColorsForApp.orangeColor,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
                                                   : const SizedBox.shrink(),
                                             ],
                                           ),
-                                          reportController
-                                              .selectedCommissionIndex
-                                              .value ==
-                                              0
+                                          reportController.selectedCommissionIndex.value == 0
                                               ? Row(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                            children: [
-                                              // Closing Balance
-                                              Expanded(
-                                                child: customKeyValueText(
-                                                  key: 'Comm Amount :',
-                                                  value: commSettledUnsettledData
-                                                      .margin
-                                                      .toString() !=
-                                                      ""
-                                                      ? "₹ ${commSettledUnsettledData.margin.toString()}"
-                                                      : '-',
-                                                ),
-                                              ),
-                                            ],
-                                          )
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  children: [
+                                                    // Closing Balance
+                                                    Expanded(
+                                                      child: customKeyValueText(
+                                                        key: 'Comm Amount :',
+                                                        value: commSettledUnsettledData.margin.toString() != "" ? "₹ ${commSettledUnsettledData.margin.toString()}" : '-',
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
                                               : Row(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                            children: [
-                                              // Closing Balance
-                                              Expanded(
-                                                child: customKeyValueText(
-                                                  key: 'Comm Amount :',
-                                                  value: commSettledUnsettledData
-                                                      .commAmount !=
-                                                      null
-                                                      ? '₹ ${commSettledUnsettledData.commAmount!.toStringAsFixed(2)}'
-                                                      : '-',
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  children: [
+                                                    // Closing Balance
+                                                    Expanded(
+                                                      child: customKeyValueText(
+                                                        key: 'Comm Amount :',
+                                                        value: commSettledUnsettledData.commAmount != null ? '₹ ${commSettledUnsettledData.commAmount!.toStringAsFixed(2)}' : '-',
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                          reportController
-                                              .selectedCommissionIndex
-                                              .value ==
-                                              1
+                                          reportController.selectedCommissionIndex.value == 1
                                               ? Row(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                            children: [
-                                              // Closing Balance
-                                              Expanded(
-                                                child: customKeyValueText(
-                                                  key: 'Updated Date :',
-                                                  value: commSettledUnsettledData
-                                                      .createdOn !=
-                                                      null &&
-                                                      commSettledUnsettledData
-                                                          .createdOn
-                                                          .isNotEmpty
-                                                      ? DateFormat(
-                                                      'MMMM dd yyyy, hh:mm aaa')
-                                                      .format(DateTime.parse(
-                                                      commSettledUnsettledData
-                                                          .createdOn))
-                                                      .toString()
-                                                      : '-',
-                                                ),
-                                              ),
-                                            ],
-                                          )
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  children: [
+                                                    // Closing Balance
+                                                    Expanded(
+                                                      child: customKeyValueText(
+                                                        key: 'Updated Date :',
+                                                        value: commSettledUnsettledData.createdOn != null && commSettledUnsettledData.createdOn.isNotEmpty
+                                                            ? DateFormat('MMMM dd yyyy, hh:mm aaa').format(DateTime.parse(commSettledUnsettledData.createdOn)).toString()
+                                                            : '-',
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
                                               : const SizedBox.shrink(),
                                         ],
                                       )),
@@ -458,31 +377,24 @@ class _CommissionReportScreenState
                           return height(0.5.h);
                         },
                       ),
-                                        ),
-                                      ),
                     ),
-              ),
-            ]
+                  ),
+          ),
         ),
+      ]),
     );
   }
 
   final DateTime _selectedDate = DateTime.now();
 
-
-
   Future<void> selectMonthAndYear(BuildContext context) async {
-    DateTime? picked =  await SimpleMonthYearPicker.showMonthYearPickerDialog(
-        context: context,
-        disableFuture: true // This will disable future years. it is false by default.
-    );
+    DateTime? picked = await SimpleMonthYearPicker.showMonthYearPickerDialog(context: context, disableFuture: true // This will disable future years. it is false by default.
+        );
     if (picked != _selectedDate) {
-        reportController.selectedYear.value = DateFormat('yyyy').format(picked);
-        reportController.selectedMonth.value = DateFormat('MM').format(picked);
-        reportController.selectedMonthName.value = DateFormat('MMM').format(picked);
-        reportController.selectedCommissionIndex.value ==  0 ?
-        await reportController.getUnsettledCommissionReportApi(pageNumber: 1) :
-        await reportController.getSettledCommissionReportApi(pageNumber: 1);
+      reportController.selectedYear.value = DateFormat('yyyy').format(picked);
+      reportController.selectedMonth.value = DateFormat('MM').format(picked);
+      reportController.selectedMonthName.value = DateFormat('MMM').format(picked);
+      reportController.selectedCommissionIndex.value == 0 ? await reportController.getUnsettledCommissionReportApi(pageNumber: 1) : await reportController.getSettledCommissionReportApi(pageNumber: 1);
     }
   }
 }

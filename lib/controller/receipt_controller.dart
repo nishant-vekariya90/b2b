@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter_html_to_pdf/flutter_html_to_pdf.dart';
+import 'package:flutter_native_html_to_pdf/flutter_native_html_to_pdf.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -140,11 +140,7 @@ class ReceiptController extends GetxController {
     showProgressIndicator();
     try {
       Directory directory = await createFolder(path: 'storage/emulated/0/Documents');
-      await FlutterHtmlToPdf.convertFromHtmlContent(
-        "'''${generatedReceipt.value}'''",
-        directory.path,
-        DateTime.now().millisecondsSinceEpoch.toString(),
-      );
+      await FlutterNativeHtmlToPdf().convertHtmlToPdf(html: "'''${generatedReceipt.value}'''", targetDirectory: directory.path, targetName: DateTime.now().millisecondsSinceEpoch.toString());
       successSnackBar(message: 'Receipt download successfully.');
     } catch (e) {
       errorSnackBar(message: e.toString());

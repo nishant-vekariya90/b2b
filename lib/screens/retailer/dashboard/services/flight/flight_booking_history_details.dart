@@ -62,6 +62,11 @@ class _FlightBookingDetailsScreenState extends State<FlightBookingDetailsScreen>
       isShowLeadingIcon: true,
       appBarBgImage: Assets.imagesFlightTopBgImage,
       leadingIconColor: Colors.white,
+      title: 'Ticket Details',
+      appBarTextStyle: TextHelper.size18.copyWith(
+        color: ColorsForApp.whiteColor,
+        fontFamily: mediumGoogleSansFont,
+      ),
       action: [
         Visibility(
           visible: flightController.flightBookingHistoryStatus(flightBookingData.status!) == 'Booked' ? true : false,
@@ -182,8 +187,6 @@ class _FlightBookingDetailsScreenState extends State<FlightBookingDetailsScreen>
           ),
         ),
       ),
-      title: 'Ticket Details',
-      appBarTextStyle: const TextStyle(color: Colors.white),
     );
   }
 
@@ -386,9 +389,7 @@ class _FlightBookingDetailsScreenState extends State<FlightBookingDetailsScreen>
                             children: [
                               Flexible(
                                 child: Text(
-                                  flightBookingData.airlineName != null && flightBookingData.airlineName!.isNotEmpty
-                                      ? '${flightBookingData.airlineName}(${flightBookingData.flightNumber ?? '-'})'
-                                      : '',
+                                  flightBookingData.airlineName != null && flightBookingData.airlineName!.isNotEmpty ? '${flightBookingData.airlineName}(${flightBookingData.flightNumber ?? '-'})' : '',
                                   textAlign: TextAlign.start,
                                   style: TextHelper.size12.copyWith(
                                     fontFamily: regularNunitoFont,
@@ -679,8 +680,7 @@ class _FlightBookingDetailsScreenState extends State<FlightBookingDetailsScreen>
               color: ColorsForApp.whiteColor,
               borderRadius: BorderRadius.all(Radius.circular(1.w)),
             ),
-            child:
-                flightMinDetails(icon: Icons.flight_class_rounded, title: flightBookingData.flightClass!.isNotEmpty && flightBookingData.flightClass != null ? flightBookingData.flightClass! : '-')),
+            child: flightMinDetails(icon: Icons.flight_class_rounded, title: flightBookingData.flightClass!.isNotEmpty && flightBookingData.flightClass != null ? flightBookingData.flightClass! : '-')),
         width(2.w),
         flightBookingData.checkInBaggage != null
             ? Container(
@@ -820,8 +820,7 @@ class _FlightBookingDetailsScreenState extends State<FlightBookingDetailsScreen>
           customKeyValueTextStyle(key: 'Base fare', value: flightBookingData.baseFare != null && flightBookingData.baseFare! > 0 ? '₹ ${flightBookingData.baseFare!.toStringAsFixed(2)}' : '-'),
           customKeyValueTextStyle(key: 'Seat fare', value: flightBookingData.seatFare != null && flightBookingData.seatFare! > 0 ? '₹ ${flightBookingData.seatFare!.toStringAsFixed(2)}' : '-'),
           customKeyValueTextStyle(key: 'Meal fare', value: flightBookingData.mealFare != null && flightBookingData.mealFare! > 0 ? '₹ ${flightBookingData.mealFare!.toStringAsFixed(2)}' : '-'),
-          customKeyValueTextStyle(
-              key: 'Baggage fare', value: flightBookingData.baggageFare != null && flightBookingData.baggageFare! > 0 ? '₹ ${flightBookingData.baggageFare!.toStringAsFixed(2)}' : '-'),
+          customKeyValueTextStyle(key: 'Baggage fare', value: flightBookingData.baggageFare != null && flightBookingData.baggageFare! > 0 ? '₹ ${flightBookingData.baggageFare!.toStringAsFixed(2)}' : '-'),
           customKeyValueTextStyle(
             key: 'Taxes and fees',
             value: "₹ ${flightBookingData.tax != null && flightBookingData.tax! > 0 ? flightBookingData.tax!.toStringAsFixed(2) : '_'}",

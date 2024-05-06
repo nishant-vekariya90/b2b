@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
+
 import '../../controller/add_money_controller.dart';
 import '../../generated/assets.dart';
 import '../../utils/app_colors.dart';
@@ -133,9 +134,7 @@ class BuildFailedStatus extends StatelessWidget {
                                 ),
                                 height(1.h),
                                 Text(
-                                  addMoneyController.checkPaymentStatusModel.value.message != null && addMoneyController.checkPaymentStatusModel.value.message!.isNotEmpty
-                                      ? addMoneyController.checkPaymentStatusModel.value.message!
-                                      : '',
+                                  addMoneyController.checkPaymentStatusModel.value.message != null && addMoneyController.checkPaymentStatusModel.value.message!.isNotEmpty ? addMoneyController.checkPaymentStatusModel.value.message! : '',
                                   textAlign: TextAlign.center,
                                   style: TextHelper.size15.copyWith(
                                     color: ColorsForApp.whiteColor,
@@ -237,9 +236,7 @@ class BuildSuccessStatus extends StatelessWidget {
                                 ),
                                 height(1.h),
                                 Text(
-                                  addMoneyController.checkPaymentStatusModel.value.message != null && addMoneyController.checkPaymentStatusModel.value.message!.isNotEmpty
-                                      ? addMoneyController.checkPaymentStatusModel.value.message!
-                                      : '',
+                                  addMoneyController.checkPaymentStatusModel.value.message != null && addMoneyController.checkPaymentStatusModel.value.message!.isNotEmpty ? addMoneyController.checkPaymentStatusModel.value.message! : '',
                                   textAlign: TextAlign.center,
                                   style: TextHelper.size15.copyWith(
                                     color: ColorsForApp.whiteColor,
@@ -302,9 +299,7 @@ class BuildSuccessStatus extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            addMoneyController.checkPaymentStatusModel.value.orderId != null && addMoneyController.checkPaymentStatusModel.value.orderId!.isNotEmpty
-                                ? addMoneyController.checkPaymentStatusModel.value.orderId!.toString()
-                                : '-',
+                            addMoneyController.checkPaymentStatusModel.value.orderId != null && addMoneyController.checkPaymentStatusModel.value.orderId!.isNotEmpty ? addMoneyController.checkPaymentStatusModel.value.orderId!.toString() : '-',
                             style: TextHelper.size16.copyWith(
                               fontFamily: mediumGoogleSansFont,
                             ),
@@ -342,9 +337,7 @@ class BuildSuccessStatus extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            addMoneyController.checkPaymentStatusModel.value.bankRefId != null && addMoneyController.checkPaymentStatusModel.value.bankRefId!.isNotEmpty
-                                ? addMoneyController.checkPaymentStatusModel.value.bankRefId!.toString()
-                                : '-',
+                            addMoneyController.checkPaymentStatusModel.value.bankRefId != null && addMoneyController.checkPaymentStatusModel.value.bankRefId!.isNotEmpty ? addMoneyController.checkPaymentStatusModel.value.bankRefId!.toString() : '-',
                             style: TextHelper.size16.copyWith(
                               fontFamily: mediumGoogleSansFont,
                             ),
@@ -428,9 +421,7 @@ class BuildPendingStatus extends StatelessWidget {
                 ),
                 height(1.h),
                 Text(
-                  addMoneyController.checkPaymentStatusModel.value.message != null && addMoneyController.checkPaymentStatusModel.value.message!.isNotEmpty
-                      ? addMoneyController.checkPaymentStatusModel.value.message!
-                      : '',
+                  addMoneyController.checkPaymentStatusModel.value.message != null && addMoneyController.checkPaymentStatusModel.value.message!.isNotEmpty ? addMoneyController.checkPaymentStatusModel.value.message! : '',
                   textAlign: TextAlign.center,
                   style: TextHelper.size15.copyWith(
                     color: ColorsForApp.whiteColor,

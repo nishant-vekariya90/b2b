@@ -103,15 +103,7 @@ class BusBookingController extends GetxController with GetTickerProviderStateMix
   RxBool canLowerDeckSelect = true.obs;
   RxBool isUpperDeckSelected = false.obs;
   RxBool canUpperDeckSelect = false.obs;
-  List seatStatusList = [
-    "Available",
-    "Sleeper",
-    "Booked",
-    "Selected by you",
-    "Available only for female passenger",
-    "Blocked by female passenger",
-    "Available for male passenger"
-  ];
+  List seatStatusList = ["Available", "Sleeper", "Booked", "Selected by you", "Available only for female passenger", "Blocked by female passenger", "Available for male passenger"];
   RxList<WhyBookBusModel> whyBusBookList = <WhyBookBusModel>[].obs;
 
   List imageDetailsList = [
@@ -121,9 +113,7 @@ class BusBookingController extends GetxController with GetTickerProviderStateMix
     "assets/images/busPng.png",
     "assets/images/busPng.png",
   ];
-  List<String> busDetailsList = [
-
-  ];
+  List<String> busDetailsList = [];
   RxInt selectedBusDetails = 0.obs;
   ItemScrollController itemScrollController = ItemScrollController();
   ItemScrollController itemScrollTabController = ItemScrollController();
@@ -285,23 +275,22 @@ class BusBookingController extends GetxController with GetTickerProviderStateMix
     whyBusBookList.clear();
 
     if (liveTracking.toLowerCase() == "true") {
-      whyBusBookList.add(WhyBookBusModel(
+      whyBusBookList.add(
+        WhyBookBusModel(
           title: 'Live Tracking',
-          description:
-              'You can now track your bus and plan your commute to the boarding point !. Family members and friends can also check the bus location to coordinate pick ups and rest assured about your safety',
-        ),);
+          description: 'You can now track your bus and plan your commute to the boarding point !. Family members and friends can also check the bus location to coordinate pick ups and rest assured about your safety',
+        ),
+      );
     }
 
     if (partialCancellationPolicy.toLowerCase() == 'true') {
       whyBusBookList.add(
         WhyBookBusModel(
           title: 'Partial cancellation',
-          description:
-              'Partial cancellation is allowed for this bus',
+          description: 'Partial cancellation is allowed for this bus',
         ),
       );
     }
-
   }
 
   void toggleVisibility() {
@@ -412,7 +401,6 @@ class BusBookingController extends GetxController with GetTickerProviderStateMix
       for (int i = 0; i < selectedDepartTime.length; i++) {
         filterListByDeparture(selectedDepartTime);
       }
-      print("filterListByDeparture----->${filteredBusList.length}");
     }
 
     // Filter By Arrival Time
@@ -420,7 +408,6 @@ class BusBookingController extends GetxController with GetTickerProviderStateMix
       for (int i = 0; i < selectedArriveTime.length; i++) {
         filterListByArrival(selectedArriveTime);
       }
-      print("filterListByArrival----->${filteredBusList.length}");
     }
 
     // Filter list by travel names
@@ -562,7 +549,6 @@ class BusBookingController extends GetxController with GetTickerProviderStateMix
     // Now you can use or return the filteredAndSortedTrips list as needed
     if (selectedTravelNames.isNotEmpty) {
       filteredBusList.assignAll(filteredAndSortedTrips);
-      print("filterListByTravelNames----->${filteredBusList.length}");
       //
     }
   }
@@ -665,8 +651,7 @@ class BusBookingController extends GetxController with GetTickerProviderStateMix
   //Get Available Bus List
   Future<void> getAvailableBusList({bool isLoaderShow = true}) async {
     try {
-      BusAvailableTripsModel busAvailableTripsModel = await busRepository.getAvailableTripsListApiCall(
-          isLoaderShow: isLoaderShow, sourceId: sourceId.value, destinationId: destinationId.value, journeyDate: dateOfJourney.value);
+      BusAvailableTripsModel busAvailableTripsModel = await busRepository.getAvailableTripsListApiCall(isLoaderShow: isLoaderShow, sourceId: sourceId.value, destinationId: destinationId.value, journeyDate: dateOfJourney.value);
       if (busAvailableTripsModel.statusCode == 1) {
         if (busAvailableTripsModel.availableTrips!.isNotEmpty) {
           availableTrips.clear();
@@ -683,7 +668,6 @@ class BusBookingController extends GetxController with GetTickerProviderStateMix
             //     filteredBusList.add(trip);
             //   }*/
             // }
-            print("---------Bus Length----> ${busOperators.length}");
           }
         } else {
           availableTrips.clear();
@@ -847,8 +831,7 @@ class BusBookingController extends GetxController with GetTickerProviderStateMix
   }
 
   setPassengerInfoController() {
-    passengerList =
-        List.generate(selectedSeatList.length, (index) => PassengerInfoModel(seat: selectedSeatList[index].name.toString()));
+    passengerList = List.generate(selectedSeatList.length, (index) => PassengerInfoModel(seat: selectedSeatList[index].name.toString()));
   }
 
 //Booking API
@@ -1117,15 +1100,7 @@ class BusBookingController extends GetxController with GetTickerProviderStateMix
     canLowerDeckSelect.value = true;
     isUpperDeckSelected.value = false;
     canUpperDeckSelect.value = false;
-    seatStatusList = [
-      "Available",
-      "Sleeper",
-      "Booked",
-      "Selected by you",
-      "Available only for female passenger",
-      "Blocked by female passenger",
-      "Available for male passenger"
-    ];
+    seatStatusList = ["Available", "Sleeper", "Booked", "Selected by you", "Available only for female passenger", "Blocked by female passenger", "Available for male passenger"];
     whyBusBookList.value = <WhyBookBusModel>[];
 
     selectedBusDetails.value = 0;

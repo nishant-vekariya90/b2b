@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
 import '../api/api_manager.dart';
-import '../model/AxisSipExportModel.dart';
+import '../model/axis_sip_export_model.dart';
 import '../model/auth/user_type_model.dart';
 import '../model/credit_debit/user_list_model.dart';
 import '../model/product/order_report_model.dart';
@@ -263,13 +264,10 @@ class ReportController extends GetxController {
     }
   }
 
-
-
-
   //get Axis Sip report
   RxList<AxisSipListModel> axisSipReportList = <AxisSipListModel>[].obs;
 
-  Future<bool> getAxisSipReportApi({required int pageNumber,required String serviceCode, bool isLoaderShow = true}) async {
+  Future<bool> getAxisSipReportApi({required int pageNumber, required String serviceCode, bool isLoaderShow = true}) async {
     try {
       AxisSipReportModel axisSipReportModel = await reportRepository.getAxisSipReportApi(
         fromDate: selectedFromDate.value,
@@ -533,14 +531,7 @@ class ReportController extends GetxController {
   Future<bool> updateOrderStatusApi({bool isLoaderShow = true, required String unqId, required String orderId}) async {
     try {
       OrderUpdateStatusModel orderUpdateStatusModel = await reportRepository.updateOrderStatusApiCall(
-        params: {
-          "unqId": unqId,
-          "status": 0,
-          "comment": commentController.text.trim(),
-          "channel": channelID,
-          "tpin": tPinTxtController.text.isNotEmpty ? tPinTxtController.text.trim() : null,
-          "orderId": "12367"
-        },
+        params: {"unqId": unqId, "status": 0, "comment": commentController.text.trim(), "channel": channelID, "tpin": tPinTxtController.text.isNotEmpty ? tPinTxtController.text.trim() : null, "orderId": "12367"},
         isLoaderShow: isLoaderShow,
       );
       if (orderUpdateStatusModel.statusCode == 1) {
@@ -565,7 +556,7 @@ class ReportController extends GetxController {
   RxInt leadReportTotalPages = 1.obs;
   RxBool leadReportHasNext = false.obs;
 
-  Future<bool> getLeadReportApi({required int pageNumber,required serviceCode, bool isLoaderShow = true}) async {
+  Future<bool> getLeadReportApi({required int pageNumber, required serviceCode, bool isLoaderShow = true}) async {
     try {
       BankSathiLeadReportModel leadReportModel = await reportRepository.getLeadReportApiCall(
         fromDate: selectedFromDate.value,
@@ -616,15 +607,19 @@ class ReportController extends GetxController {
         if (notificationReportModel.pagination!.currentPage == 1) {
           notificationReportList.clear();
         }
-        notificationUnReadCount.value=0;
+        notificationUnReadCount.value = 0;
         //sorting notification list based on isRead value to show unread notification in ascending order
-        notificationReportModel.notificationDataList!.sort((a, b) => (a.isRead == b.isRead) ? 0 : a.isRead! ? 1 : -1);
+        notificationReportModel.notificationDataList!.sort((a, b) => (a.isRead == b.isRead)
+            ? 0
+            : a.isRead!
+                ? 1
+                : -1);
 
         for (NotificationReportData element in notificationReportModel.notificationDataList!) {
           notificationReportList.add(element);
-          if(!element.isRead!){
+          if (!element.isRead!) {
             //incrementing unread notification count if notification is not read
-           notificationUnReadCount.value++;
+            notificationUnReadCount.value++;
           }
         }
         currentPage.value = notificationReportModel.pagination!.currentPage!;
@@ -649,9 +644,7 @@ class ReportController extends GetxController {
   Future<bool> readNotificationApi({bool isLoaderShow = true, required String id}) async {
     try {
       SuccessModel successModel = await reportRepository.readNotificationApiCall(
-        params: {
-          "isRead": true
-        },
+        params: {"isRead": true},
         isLoaderShow: isLoaderShow,
         uniqueId: id,
       );
@@ -668,13 +661,10 @@ class ReportController extends GetxController {
     }
   }
 
-
-
   clearLeadReportVariables() {
     selectedFromDate.value = '';
     selectedToDate.value = '';
   }
-
 
   ///////////////////////////////
   //     Commission Report     //
@@ -686,16 +676,15 @@ class ReportController extends GetxController {
   RxString selectedMonthName = ''.obs;
   RxString selectedYear = ''.obs;
 
-
   RxList<SettledCommissionModelData> settledReportDataList = <SettledCommissionModelData>[].obs;
   RxList<UnSettledCommissionModelData> unSettledReportDataList = <UnSettledCommissionModelData>[].obs;
   RxList<CommissionDetailsModalData> commissionDetailsReportDataList = <CommissionDetailsModalData>[].obs;
   RxString commissionDetailsExportReportUrl = "".obs;
 
-  settledCommissionStatus(int? status){
-    if(status == 1){
+  settledCommissionStatus(int? status) {
+    if (status == 1) {
       return "Settled";
-    }else if(status == 2){
+    } else if (status == 2) {
       return "Pending";
     }
   }
@@ -713,7 +702,7 @@ class ReportController extends GetxController {
         if (settlementCommissionModel.pagination!.currentPage == 1) {
           settledReportDataList.clear();
         }
-        for(var element in settlementCommissionModel.data!){
+        for (var element in settlementCommissionModel.data!) {
           settledReportDataList.add(element);
         }
         currentPage.value = settlementCommissionModel.pagination!.currentPage!;
@@ -748,7 +737,7 @@ class ReportController extends GetxController {
         if (unSettledCommissionModel.pagination!.currentPage == 1) {
           unSettledReportDataList.clear();
         }
-        for(var element in unSettledCommissionModel.data!){
+        for (var element in unSettledCommissionModel.data!) {
           unSettledReportDataList.add(element);
         }
         currentPage.value = unSettledCommissionModel.pagination!.currentPage!;
@@ -769,7 +758,7 @@ class ReportController extends GetxController {
     }
   }
 
-  Future<bool> getCommissionDetailsReportApi({required int pageNumber, bool isLoaderShow = true,required int commissionDetailsIndex}) async {
+  Future<bool> getCommissionDetailsReportApi({required int pageNumber, bool isLoaderShow = true, required int commissionDetailsIndex}) async {
     commissionDetailsReportDataList.clear();
     try {
       CommissionDetailsModal commissionDetailsModal = await reportRepository.getCommissionDetailsReportApi(
@@ -784,7 +773,7 @@ class ReportController extends GetxController {
         if (commissionDetailsModal.pagination!.currentPage == 1) {
           commissionDetailsReportDataList.clear();
         }
-        for(var element in commissionDetailsModal.data!){
+        for (var element in commissionDetailsModal.data!) {
           commissionDetailsReportDataList.add(element);
         }
         currentPage.value = commissionDetailsModal.pagination!.currentPage!;
@@ -805,7 +794,7 @@ class ReportController extends GetxController {
     }
   }
 
-  Future<bool> getCommissionDetailsExportReportApi({required int pageNumber, bool isLoaderShow = true,required int commissionDetailsIndex}) async {
+  Future<bool> getCommissionDetailsExportReportApi({required int pageNumber, bool isLoaderShow = true, required int commissionDetailsIndex}) async {
     commissionDetailsExportReportUrl.value = "";
     try {
       CommissionDetailsExportModel commissionDetailsExportModel = await reportRepository.getCommissionDetailsExportReportApi(
@@ -831,7 +820,7 @@ class ReportController extends GetxController {
   }
 
   //Get wallet type
-  Future<bool> getAxisSipExportApi({required int pageNumber,required String serviceCode, bool isLoaderShow = true}) async {
+  Future<bool> getAxisSipExportApi({required int pageNumber, required String serviceCode, bool isLoaderShow = true}) async {
     try {
       AxisSipExportModel axisSipReportModel = await reportRepository.getExportSipApiCall(
         fromDate: selectedFromDate.value,
@@ -841,7 +830,7 @@ class ReportController extends GetxController {
         isLoaderShow: isLoaderShow,
       );
       if (axisSipReportModel.item1 == true) {
-        exportSipUrl.value=axisSipReportModel.item2!;
+        exportSipUrl.value = axisSipReportModel.item2!;
         return true;
       } else {
         errorSnackBar(message: "Something went wrong");
@@ -859,8 +848,8 @@ class ReportController extends GetxController {
   RxString searchType = "".obs;
   RxList<String> searchTypeList = ["Mobile", "Account Number", "Api Ref Id", "RRN", "Client Ref Id", "TID"].obs;
 
-
-  Future<bool> getSearchTransactionReport({required String mobileNo,required String accountNo,required String apiRefId,required String operatorRefId,required String clientRefId,required String orderId,required int userId,bool isLoaderShow = true}) async {
+  Future<bool> getSearchTransactionReport(
+      {required String mobileNo, required String accountNo, required String apiRefId, required String operatorRefId, required String clientRefId, required String orderId, required int userId, bool isLoaderShow = true}) async {
     searchTransactionReportDataList.clear();
     try {
       SearchTransactionReportModel searchTransactionReportModel = await reportRepository.getSearchTransactionReportApi(
@@ -875,7 +864,7 @@ class ReportController extends GetxController {
       );
 
       if (searchTransactionReportModel.statusCode == 1) {
-        for(var element in searchTransactionReportModel.data!){
+        for (var element in searchTransactionReportModel.data!) {
           searchTransactionReportDataList.add(element);
         }
 
@@ -889,11 +878,8 @@ class ReportController extends GetxController {
         return false;
       }
     } catch (e) {
-      print("Exception => $e");
       dismissProgressIndicator();
       return false;
     }
   }
-
-
 }

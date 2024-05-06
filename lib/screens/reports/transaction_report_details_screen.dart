@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share/share.dart';
 import 'package:sizer/sizer.dart';
+
 import '../../../controller/report_controller.dart';
 import '../../../generated/assets.dart';
 import '../../../model/report/transaction_report_model.dart';

@@ -4,8 +4,7 @@ class BusBookingPassengersDetailModel {
   String? message;
   int? statusCode;
 
-  BusBookingPassengersDetailModel(
-      {this.data, this.pagination, this.message, this.statusCode});
+  BusBookingPassengersDetailModel({this.data, this.pagination, this.message, this.statusCode});
 
   BusBookingPassengersDetailModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
@@ -14,9 +13,7 @@ class BusBookingPassengersDetailModel {
         data!.add(BusBookingPassengersDetailData.fromJson(v));
       });
     }
-    pagination = json['pagination'] != null
-        ? Pagination.fromJson(json['pagination'])
-        : null;
+    pagination = json['pagination'] != null ? Pagination.fromJson(json['pagination']) : null;
     message = json['message'];
     statusCode = json['statusCode'];
   }
@@ -60,26 +57,26 @@ class BusBookingPassengersDetailData {
 
   BusBookingPassengersDetailData(
       {this.id,
-        this.busTxnID,
-        this.name,
-        this.age,
-        this.gender,
-        this.title,
-        this.fare,
-        this.address,
-        this.email,
-        this.mobile,
-        this.ladiesSeat,
-        this.isPrimary,
-        this.ticketNumber,
-        this.seatNumber,
-        this.passengerId,
-        this.passengerType,
-        this.status,
-        this.createdOn,
-        this.createdBy,
-        this.modifiedOn,
-        this.modifiedBy});
+      this.busTxnID,
+      this.name,
+      this.age,
+      this.gender,
+      this.title,
+      this.fare,
+      this.address,
+      this.email,
+      this.mobile,
+      this.ladiesSeat,
+      this.isPrimary,
+      this.ticketNumber,
+      this.seatNumber,
+      this.passengerId,
+      this.passengerType,
+      this.status,
+      this.createdOn,
+      this.createdBy,
+      this.modifiedOn,
+      this.modifiedBy});
 
   BusBookingPassengersDetailData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -106,28 +103,28 @@ class BusBookingPassengersDetailData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['busTxnID'] = this.busTxnID;
-    data['name'] = this.name;
-    data['age'] = this.age;
-    data['gender'] = this.gender;
-    data['title'] = this.title;
-    data['fare'] = this.fare;
-    data['address'] = this.address;
-    data['email'] = this.email;
-    data['mobile'] = this.mobile;
-    data['ladiesSeat'] = this.ladiesSeat;
-    data['isPrimary'] = this.isPrimary;
-    data['ticketNumber'] = this.ticketNumber;
-    data['seatNumber'] = this.seatNumber;
-    data['passengerId'] = this.passengerId;
-    data['passengerType'] = this.passengerType;
-    data['status'] = this.status;
-    data['createdOn'] = this.createdOn;
-    data['createdBy'] = this.createdBy;
-    data['modifiedOn'] = this.modifiedOn;
-    data['modifiedBy'] = this.modifiedBy;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['busTxnID'] = busTxnID;
+    data['name'] = name;
+    data['age'] = age;
+    data['gender'] = gender;
+    data['title'] = title;
+    data['fare'] = fare;
+    data['address'] = address;
+    data['email'] = email;
+    data['mobile'] = mobile;
+    data['ladiesSeat'] = ladiesSeat;
+    data['isPrimary'] = isPrimary;
+    data['ticketNumber'] = ticketNumber;
+    data['seatNumber'] = seatNumber;
+    data['passengerId'] = passengerId;
+    data['passengerType'] = passengerType;
+    data['status'] = status;
+    data['createdOn'] = createdOn;
+    data['createdBy'] = createdBy;
+    data['modifiedOn'] = modifiedOn;
+    data['modifiedBy'] = modifiedBy;
     return data;
   }
 }
@@ -140,13 +137,7 @@ class Pagination {
   bool? hasPrevious;
   bool? hasNext;
 
-  Pagination(
-      {this.currentPage,
-        this.totalPages,
-        this.pageSize,
-        this.totalCount,
-        this.hasPrevious,
-        this.hasNext});
+  Pagination({this.currentPage, this.totalPages, this.pageSize, this.totalCount, this.hasPrevious, this.hasNext});
 
   Pagination.fromJson(Map<String, dynamic> json) {
     currentPage = json['currentPage'];

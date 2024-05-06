@@ -1,6 +1,6 @@
 import 'dart:developer';
-
 import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:otp_autofill/otp_autofill.dart';
 import 'package:sizer/sizer.dart';
+
 import '../../controller/auth_controller.dart';
 import '../../controller/location_controller.dart';
 import '../../generated/assets.dart';

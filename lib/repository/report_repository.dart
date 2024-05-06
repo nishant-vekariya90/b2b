@@ -2,7 +2,7 @@
 
 
 import '../api/api_manager.dart';
-import '../model/AxisSipExportModel.dart';
+import '../model/axis_sip_export_model.dart';
 import '../model/auth/user_type_model.dart';
 import '../model/credit_debit/user_list_model.dart';
 import '../model/product/order_report_model.dart';

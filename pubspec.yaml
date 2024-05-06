@@ -9,80 +9,74 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  audioplayers: ^5.2.0
+  audioplayers: ^6.0.0
   equatable: ^2.0.5
-  cached_network_image: ^3.2.3
+  cached_network_image: ^3.3.1
   camera: ^0.10.5+9
   carousel_slider: ^4.2.1
-  connectivity_plus: ^4.0.2
+  connectivity_plus: ^6.0.3
   contacts_service: ^0.6.3
   crypto: ^3.0.3
-  cupertino_icons: ^1.0.2
-  device_info_plus: ^9.0.2
+  cupertino_icons: ^1.0.8
+  device_info_plus: ^9.1.2
   dotted_border: ^2.1.0
-  easy_stepper: ^0.7.3
+  easy_stepper: ^0.8.3
   expandable_text: ^2.3.0
-  external_app_launcher: ^3.1.0
-  file_picker: ^6.1.1
-  firebase_core: ^2.21.0
-  firebase_crashlytics: ^3.4.8
-  firebase_messaging: ^14.7.10
-  flutter_cache_manager: ^3.3.1
-  flutter_cashfree_pg_sdk: ^2.1.1+31
+  external_app_launcher: ^4.0.0
+  file_picker: ^8.0.3
+  firebase_core: ^2.30.1
+  firebase_crashlytics: ^3.5.4
+  firebase_messaging: ^14.9.1
+  flutter_cache_manager: ^3.3.2
+  flutter_cashfree_pg_sdk: ^2.1.2+32
   flutter_dash: ^1.0.0
   flutter_date_range_picker: ^0.0.14
-  simple_month_year_picker: ^1.0.5
   flutter_easyloading: ^3.0.5
   flutter_html: ^3.0.0-beta.2
-  flutter_html_to_pdf: ^0.7.0
-  flutter_img: ^0.1.5+111
   flutter_inappwebview: ^6.0.0
-  flutter_local_notifications: ^16.1.0
-  flutter_linkify: ^6.0.0
-  flutter_speed_dial: ^7.0.0
+  flutter_local_notifications: ^17.1.1
+  flutter_native_html_to_pdf: ^1.0.1
+  flutter_svg: ^2.0.10+1
   flutter_switch: ^0.3.2
-  flutter_svg: ^2.0.9
-  flutter_zoom_drawer: ^3.1.1
-  get: ^4.6.5
+  flutter_zoom_drawer: ^3.2.0
+  get: ^4.6.6
   get_storage: ^2.1.1
-  geolocator: ^9.0.2
+  geolocator: ^11.0.0
   html_unescape: ^2.0.0
-  http: ^1.1.0
-  image: ^3.0.1
-  image_editor: ^1.3.0
-  image_picker: ^1.0.7
+  http: ^1.2.1
+  image: ^4.1.7
+  image_editor: ^1.5.0
+  image_picker: ^1.1.1
   intl: ^0.18.1
   jwt_decoder: ^2.0.1
-  lottie: ^2.6.0
+  lottie: ^3.1.0
   marquee: ^2.2.3
   open_file: ^3.3.2
   otp_autofill: ^3.0.2
   package_info_plus: ^4.2.0
-  path: ^1.8.3
-  path_provider: ^2.0.15
-  paytm_allinonesdk: ^1.2.3
-  payu_checkoutpro_flutter: ^1.1.1
+  path: ^1.9.0
+  path_provider: ^2.1.3
+  paytm_allinonesdk: ^1.2.5
+  payu_checkoutpro_flutter: ^1.1.4
   pdfx: ^2.6.0
-  permission_handler: ^10.4.3
+  permission_handler: ^11.3.1
   phonepe_payment_sdk: ^2.0.1
   qr_code_scanner: ^1.0.1
   razorpay_flutter: ^1.3.6
-  screenshot: ^2.1.0
   simple_html_css: ^4.0.0
-  share: ^2.0.1
+  simple_month_year_picker: ^1.0.5
+  share: ^2.0.4
   scrollable_positioned_list: ^0.3.8
   shimmer: ^3.0.0
   sizer: ^2.0.15
-  syncfusion_flutter_sliders: ^24.2.9
-  syncfusion_flutter_core: ^24.2.9
-  table_calendar:
-  url_launcher: ^6.1.12
+  table_calendar: ^3.0.9
+  url_launcher: ^6.2.6
   vibration: ^1.8.4
-  video_player:
   video_compress: ^3.1.2
+  video_player: ^2.8.6
   video_thumbnail: ^0.5.3
-  webview_flutter: ^4.4.2
-  weipl_checkout_flutter: ^1.0.4
+  webview_flutter: ^4.7.0
+  weipl_checkout_flutter: ^1.0.7
 
 dev_dependencies:
   flutter_test:

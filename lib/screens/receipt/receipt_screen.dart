@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_html_to_pdf/flutter_html_to_pdf.dart';
+// import 'package:flutter_html_to_pdf/flutter_html_to_pdf.dart';
+import 'package:flutter_native_html_to_pdf/flutter_native_html_to_pdf.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdfx/pdfx.dart';
@@ -82,10 +83,8 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
       Directory tempDir = await getApplicationDocumentsDirectory();
       final targetPath = tempDir.path;
       final targetFileName = "${DateTime.now().millisecondsSinceEpoch}";
-      final generatedPdfFile = await FlutterHtmlToPdf.convertFromHtmlContent(htmlContent, targetPath, targetFileName).timeout(
-        const Duration(seconds: 30),
-      );
-      receiptController.generatedPdfFilePath.value = generatedPdfFile.path;
+      File? generatedPdfFile = await FlutterNativeHtmlToPdf().convertHtmlToPdf(html: htmlContent, targetDirectory: targetPath, targetName: targetFileName);
+      receiptController.generatedPdfFilePath.value = generatedPdfFile!.path;
       if (receiptController.generatedPdfFilePath.value.isNotEmpty) {
         return true;
       } else {
@@ -115,10 +114,14 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        if (didPop) {
+          return;
+        }
         await deletePDFFromCache();
-        return true;
+        Get.back();
       },
       child: CustomScaffold(
         title: 'Receipt',
@@ -181,7 +184,7 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                       pageBuilder: pageBuilder,
                     ),
                     controller: pdfController,
-              scrollDirection: Axis.vertical,
+                    scrollDirection: Axis.vertical,
                   )
                 : const SizedBox(),
           ),
@@ -201,7 +204,7 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
         pageImage,
         index,
         document.id,
-           ),
+      ),
       basePosition: Alignment.topCenter,
       filterQuality: FilterQuality.high,
       tightMode: true,
@@ -209,8 +212,6 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
       maxScale: PhotoViewComputedScale.contained * 2,
       initialScale: PhotoViewComputedScale.contained * 1.0,
       heroAttributes: PhotoViewHeroAttributes(tag: '${document.id}-$index'),
-
     );
   }
-
 }

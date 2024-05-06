@@ -1,11 +1,13 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_html_to_pdf/flutter_html_to_pdf.dart';
+import 'package:flutter_native_html_to_pdf/flutter_native_html_to_pdf.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdfx/pdfx.dart';
 import 'package:share/share.dart';
 import 'package:sizer/sizer.dart';
+
 import '../../controller/receipt_controller.dart';
 import '../../model/aeps/mini_statement_model.dart';
 import '../../utils/app_colors.dart';
@@ -66,10 +68,8 @@ class _MiniStatementReceiptScreenState extends State<MiniStatementReceiptScreen>
       Directory tempDir = await getApplicationDocumentsDirectory();
       final targetPath = tempDir.path;
       final targetFileName = "${DateTime.now().millisecondsSinceEpoch}";
-      final generatedPdfFile = await FlutterHtmlToPdf.convertFromHtmlContent(htmlContent, targetPath, targetFileName).timeout(
-        const Duration(seconds: 30),
-      );
-      receiptController.generatedPdfFilePath.value = generatedPdfFile.path;
+      File? generatedPdfFile = await FlutterNativeHtmlToPdf().convertHtmlToPdf(html: htmlContent, targetDirectory: targetPath, targetName: targetFileName);
+      receiptController.generatedPdfFilePath.value = generatedPdfFile!.path;
       if (receiptController.generatedPdfFilePath.value.isNotEmpty) {
         return true;
       } else {

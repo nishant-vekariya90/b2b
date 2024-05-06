@@ -12,6 +12,7 @@ import 'package:flutter_date_range_picker/flutter_date_range_picker.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:html_unescape/html_unescape.dart';
+// import 'package:html_unescape/html_unescape.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -1009,21 +1010,21 @@ Widget iconWithText({required String title, required String icon, required void 
 }
 
 // Custom card for report
-Widget customCard({required Widget child, Color? shadowColor,Color? borderColor,Color? cardColor,int? elevation}) {
-  return  Card(
-      elevation: 2,
-      color: cardColor??ColorsForApp.whiteColor,
-      shadowColor: shadowColor,
-      margin: const EdgeInsets.all(4),
-      shape: RoundedRectangleBorder(
-        side: BorderSide(
-          color: borderColor??ColorsForApp.grayScale500.withOpacity(0.5),
-          width: 0.5,
-        ),
-        borderRadius: BorderRadius.circular(16),
+Widget customCard({required Widget child, Color? shadowColor, Color? borderColor, Color? cardColor, int? elevation}) {
+  return Card(
+    elevation: 2,
+    color: cardColor ?? ColorsForApp.whiteColor,
+    shadowColor: shadowColor,
+    margin: const EdgeInsets.all(4),
+    shape: RoundedRectangleBorder(
+      side: BorderSide(
+        color: borderColor ?? ColorsForApp.grayScale500.withOpacity(0.5),
+        width: 0.5,
       ),
-      child: child,
-    );
+      borderRadius: BorderRadius.circular(16),
+    ),
+    child: child,
+  );
 }
 
 final List<String> units = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
